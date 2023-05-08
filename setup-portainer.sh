@@ -18,14 +18,14 @@ echo "$username:$password" | sudo chpasswd
 sudo mkdir -p /home/$username
 sudo chown $username:$username /home/$username
 
-# Move /root/setup to the user's home directory and set ownership
-echo "Moving /root/setup folder to user's home directory and setting ownership..."
-sudo cp -R /root/setup /home/$username/
+# Move /opt/scripts to the user's home directory and set ownership
+echo "Moving /opt/scripts folder to user's home directory and setting ownership..."
+sudo cp -R /opt/scripts /home/$username/
 sudo chown -R $username:$username /home/$username/scripts
 
 # Make all .sh files inside the scripts folder executable
 echo "Making all .sh files inside the scripts folder executable..."
-find /home/$username/setup -type f -name "*.sh" -exec chmod +x {} \;
+find /home/$username/scripts -type f -name "*.sh" -exec chmod +x {} \;
 
 # Install Docker and Docker Compose
 echo "Installing Docker and Docker Compose..."
@@ -36,9 +36,10 @@ sudo systemctl start docker.service
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# Install Portainer agent and connect to Portainer master
-echo "Installing Portainer agent..."
-sudo docker run -d --name portainer_agent --restart always -v /var/run/docker.sock:/var/run/docker.sock -e AGENT_CLUSTER_ADDR=<PORTAINER_MASTER_IP_ADDRESS> portainer/agent
+# Install Portainer
+echo "Installing Portainer..."
+sudo docker volume create portainer_data
+sudo docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 
 # Output cool thing showing installation is finished
 echo "
@@ -49,6 +50,5 @@ echo "
  | |___| |__| | |  | | |    | |____| |____   | |  | |____ 
   \_____\____/|_|  |_|_|    |______|______|  |_|  |______|
 
-Installation is complete! Enjoy using Docker, Docker Compose, and Portainer agent.
+Installation is complete! Enjoy using Docker, Docker Compose, and Portainer.
 "
-
