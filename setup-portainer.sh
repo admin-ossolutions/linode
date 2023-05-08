@@ -40,10 +40,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 echo "Installing Portainer agent..."
 sudo docker run -d --name portainer_agent --restart always -v /var/run/docker.sock:/var/run/docker.sock -e AGENT_CLUSTER_ADDR=<PORTAINER_MASTER_IP_ADDRESS> portainer/agent
 
-# Print success message and login with new user
-echo "New user $username created successfully. Docker, Docker Compose, and Portainer agent installed. Logging in with new user..."
-sudo su - $username -c "cd /home/$username/scripts && ./<SOME_SCRIPT>.sh"
-
 # Output cool thing showing installation is finished
 echo "
    _____ ____  __  __ _____  _      ______ _______ ______ 
