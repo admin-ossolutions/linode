@@ -25,7 +25,7 @@ sudo chown -R $username:$username /home/$username/setup
 
 # Make all .sh files inside the scripts folder executable
 echo "Making all .sh files inside the scripts folder executable..."
-find /home/$username/scripts -type f -name "*.sh" -exec chmod +x {} \;
+find /home/$username/setup -type f -name "*.sh" -exec chmod +x {} \;
 
 # Install Docker and Docker Compose
 echo "Installing Docker and Docker Compose..."
