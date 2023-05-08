@@ -18,8 +18,8 @@ echo "$username:$password" | sudo chpasswd
 sudo mkdir -p /home/$username
 sudo chown $username:$username /home/$username
 
-# Move /opt/scripts to the user's home directory and set ownership
-echo "Moving /opt/scripts folder to user's home directory and setting ownership..."
+# Move /root/setup to the user's home directory and set ownership
+echo "Moving /root/setup folder to user's home directory and setting ownership..."
 sudo cp -R /opt/scripts /home/$username/
 sudo chown -R $username:$username /home/$username/scripts
 
