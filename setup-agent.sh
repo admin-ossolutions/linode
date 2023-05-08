@@ -10,7 +10,18 @@ sudo hostnamectl set-hostname "$servername"
 
 # Get username and password for new user
 read -p "Enter username for new user: " username
-read -s -p "Enter password for new user: " password
+while true; do
+    read -s -p "Enter password for new user: " password1
+    echo
+    read -s -p "Confirm password for new user: " password2
+    echo
+    if [ "$password1" = "$password2" ]; then
+        password="$password1"
+        break
+    else
+        echo "Passwords do not match. Please try again."
+    fi
+done
 
 # Create new user, add to sudo group, and set home directory
 sudo useradd -m -s /bin/bash -G sudo $username
