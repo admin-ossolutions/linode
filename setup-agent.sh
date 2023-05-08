@@ -20,8 +20,8 @@ sudo chown $username:$username /home/$username
 
 # Move /root/setup to the user's home directory and set ownership
 echo "Moving /root/setup folder to user's home directory and setting ownership..."
-sudo cp -R /opt/scripts /home/$username/
-sudo chown -R $username:$username /home/$username/scripts
+sudo cp -R /root/setup /home/$username/
+sudo chown -R $username:$username /home/$username/setup
 
 # Make all .sh files inside the scripts folder executable
 echo "Making all .sh files inside the scripts folder executable..."
